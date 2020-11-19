@@ -18,6 +18,7 @@ PAGES = [
     "Test for Random Number Generator",
     "Ranji Trophy Data",
     "Gold Prices",
+    "Air Quality Index Data",
     "Runs Test Exception"
 ]
 
@@ -312,5 +313,51 @@ if(selection=="Runs Test Exception"):
 	st.markdown(html_temp3.format("blue","Decision"),unsafe_allow_html=True)
 	if(pvalue>alpha):
 		st.write("We cannot reject the hypothesis that data is Random")
+	else:
+		st.write("Data calls for rejecting the null hypothesis")
+
+
+
+#code for Air Quality index data
+if(selection=="Air Quality Index Data"):
+	st.markdown(html_temp.format("white","Air Quality Index Data"),unsafe_allow_html=True)
+
+	st.write('\n')
+	st.write('\n')
+
+	st.write("H0: Average monthly Air Quality index over several months is random in nature")
+	st.write("H1: Average monthly Air Quality Index is not random")
+
+	st.write('\n')
+	st.write('\n')
+	st.markdown(html_temp3.format("blue","Data format"),unsafe_allow_html=True)
+	data=pd.read_csv("./data/AQI_data.csv")
+	
+	st.write(data.head())
+
+	data=data["AQI"]
+
+	data=np.array(data)
+
+	st.write('\n')
+	st.write('\n')
+	alpha=st.number_input('Alpha', min_value=0.0, max_value=1.0, value=0.05, step=0.01, format=None, key=None)
+	st.write('\n')
+	st.write('\n')
+	runs,mean,std=runsTest_notBinary(data)
+	pvalue=2*min(1 - norm.cdf((runs-mean)/std),norm.cdf((runs-mean)/std))
+
+	st.markdown(html_temp1.format("white","Results"),unsafe_allow_html=True)
+	st.write('\n')
+	st.write('\n')
+
+	st.markdown(html_temp3.format("blue","P-value"),unsafe_allow_html=True)
+	st.write(pvalue)
+	st.write('\n')
+	st.write('\n')
+
+	st.markdown(html_temp3.format("blue","Decision"),unsafe_allow_html=True)
+	if(pvalue>alpha):
+		st.write("We cannot reject the hypothesis that monthly average Air Quality Index is Random")
 	else:
 		st.write("Data calls for rejecting the null hypothesis")
