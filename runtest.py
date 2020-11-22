@@ -92,3 +92,9 @@ plt.axhline(y=lower_limit,color='r',linestyle='-')
 plt.plot(test_values,'g^')
 plt.ylabel("Proportion Values")
 plt.show()
+
+
+from wellrng import random
+
+for i in range(10):
+    print(random())

@@ -12,6 +12,7 @@ import numpy as np
 import re
 from testcode import *
 import pandas as pd
+from wellrng import random as pr
 
 PAGES = [
     "Runs Test Calculator",
@@ -101,12 +102,26 @@ if(selection=="Test for Random Number Generator"):
 	            count+=1
 	    return count/samples
 
+	def getTestPoker(samples,size_of_sequence):
+		count=0
+		for i in range(samples):
+			l=np.zeros(size_of_sequence)
+
+			for j in range(0,size_of_sequence):
+				l[j]=pr()
+
+			runs,mean,std=runsTest_notBinary(l)
+			pvalue=2*min(1 - norm.cdf((runs-mean)/std),norm.cdf((runs-mean)/std))
+			if(pvalue>alpha):
+				count+=1
+		return count/samples
+
 	import matplotlib.pyplot as plt
 
 
 	test_values=[]
 
-	opt = st.radio("Select your random generator option",('Python library Random Number Generator', 'Linear Congruential Generator'))
+	opt = st.radio("Select your random generator option",('Python library Random Number Generator', 'Linear Congruential Generator','Poker Random Generator'))
 
 	if(opt=='Python library Random Number Generator'):
 		for i in range(20):
@@ -114,7 +129,9 @@ if(selection=="Test for Random Number Generator"):
 	elif(opt=='Linear Congruential Generator'):
 		for i in range(20):
 		    test_values.append(getTestPsuedo(samples,size_of_sequence))
-
+	elif(opt=='Poker Random Generator'):
+		for i in range(20):
+			test_values.append(getTestPoker(samples,size_of_sequence))
 
 	st.write('\n')
 	st.write('\n')
