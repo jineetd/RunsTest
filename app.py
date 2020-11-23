@@ -153,16 +153,27 @@ if(selection=="Runs Test Calculator"):
 	st.write('\n')
 
 	collect_numbers = lambda x : [int(i) for i in re.split("[^0-9]", x) if i != ""]
-	numbers = st.text_input("PLease enter numbers")
+	numbers = st.text_input("Please enter numbers")
 	l=collect_numbers(numbers)
-	st.write(l)
+	#st.write(l)
+	isBinary=st.checkbox("Binary Data")
+
 
 	st.write('\n')
 	st.write('\n')
 	alpha=st.number_input('Type-1 Error', min_value=0.0, max_value=1.0, value=0.01, step=0.01, format=None, key=None)
 	st.write('\n')
 	st.write('\n')
-	runs,mean,std=runsTest_notBinary(l)
+
+	runs=0
+	mean=0
+	std=0
+	#doing for binary or non binary data based on the options given in checkbox
+	if isBinary:
+		runs,mean,std=runsTest(l)
+	else:
+		runs,mean,std=runsTest_notBinary(l)
+	
 	pvalue=2*min(1 - norm.cdf((runs-mean)/std),norm.cdf((runs-mean)/std))
 
 	st.markdown(html_temp1.format("white","Results"),unsafe_allow_html=True)
