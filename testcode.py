@@ -2,7 +2,9 @@
 import statistics
 import math
 def runsTest_notBinary(sample_list): 
-  
+    
+    if(len(sample_list)==0):
+        return
     runs, n1, n2 = 0, 0, 0
     median = statistics.median(sample_list)
     l=[]
@@ -49,6 +51,10 @@ def runsTest_notBinary(sample_list):
 #runs test for binary sequence
 def runsTest(l): 
   
+
+    if(len(l)==0):
+        return
+
     runs, n1, n2 = 0, 0, 0
       
     # Checking for start of new run 

@@ -153,7 +153,7 @@ if(selection=="Runs Test Calculator"):
 	st.write('\n')
 
 	collect_numbers = lambda x : [int(i) for i in re.split("[^0-9]", x) if i != ""]
-	numbers = st.text_input("Please enter numbers")
+	numbers = st.text_input("Please enter numbers(more than 2)")
 	l=collect_numbers(numbers)
 	#st.write(l)
 	isBinary=st.checkbox("Binary Data")
@@ -168,28 +168,45 @@ if(selection=="Runs Test Calculator"):
 	runs=0
 	mean=0
 	std=0
-	#doing for binary or non binary data based on the options given in checkbox
-	if isBinary:
-		runs,mean,std=runsTest(l)
-	else:
-		runs,mean,std=runsTest_notBinary(l)
-	
-	pvalue=2*min(1 - norm.cdf((runs-mean)/std),norm.cdf((runs-mean)/std))
 
-	st.markdown(html_temp1.format("white","Results"),unsafe_allow_html=True)
-	st.write('\n')
-	st.write('\n')
+	if(len(l)>0):
+		#doing for binary or non binary data based on the options given in checkbox
+		if isBinary:
+			runs,mean,std=runsTest(l)
+		else:
+			runs,mean,std=runsTest_notBinary(l)
+		
+		pvalue=2*min(1 - norm.cdf((runs-mean)/std),norm.cdf((runs-mean)/std))
 
-	st.markdown(html_temp3.format("blue","P-value"),unsafe_allow_html=True)
-	st.write(pvalue)
-	st.write('\n')
-	st.write('\n')
+		st.markdown(html_temp1.format("white","Results"),unsafe_allow_html=True)
+		st.write('\n')
+		st.write('\n')
 
-	st.markdown(html_temp3.format("blue","Decision"),unsafe_allow_html=True)
-	if(pvalue>alpha):
-		st.write("We cannot reject the hypothesis that the given data values are random")
-	else:
-		st.write("Data indicates that the hypothesis that the dataset is random should be rejected")
+		st.markdown(html_temp3.format("blue","Runs"),unsafe_allow_html=True)
+		st.write(runs)
+		st.write('\n')
+		st.write('\n')
+
+		st.markdown(html_temp3.format("blue","Mean"),unsafe_allow_html=True)
+		st.write(mean)
+		st.write('\n')
+		st.write('\n')
+
+		st.markdown(html_temp3.format("blue","Standard Deviation"),unsafe_allow_html=True)
+		st.write(std)
+		st.write('\n')
+		st.write('\n')
+
+		st.markdown(html_temp3.format("blue","P-value"),unsafe_allow_html=True)
+		st.write(pvalue)
+		st.write('\n')
+		st.write('\n')
+
+		st.markdown(html_temp3.format("blue","Decision"),unsafe_allow_html=True)
+		if(pvalue>alpha):
+			st.write("We cannot reject the hypothesis that the given data values are random")
+		else:
+			st.write("Data indicates that the hypothesis that the dataset is random should be rejected")
 
 
 #code for Ranji Trophy data
@@ -220,6 +237,21 @@ if(selection=="Ranji Trophy Data"):
 	pvalue=2*min(1 - norm.cdf((runs-mean)/std),norm.cdf((runs-mean)/std))
 
 	st.markdown(html_temp1.format("white","Results"),unsafe_allow_html=True)
+	st.write('\n')
+	st.write('\n')
+
+	st.markdown(html_temp3.format("blue","Runs"),unsafe_allow_html=True)
+	st.write(runs)
+	st.write('\n')
+	st.write('\n')
+
+	st.markdown(html_temp3.format("blue","Mean"),unsafe_allow_html=True)
+	st.write(mean)
+	st.write('\n')
+	st.write('\n')
+
+	st.markdown(html_temp3.format("blue","Standard Deviation"),unsafe_allow_html=True)
+	st.write(std)
 	st.write('\n')
 	st.write('\n')
 
@@ -266,6 +298,21 @@ if(selection=="Gold Prices"):
 	pvalue=2*min(1 - norm.cdf((runs-mean)/std),norm.cdf((runs-mean)/std))
 
 	st.markdown(html_temp1.format("white","Results"),unsafe_allow_html=True)
+	st.write('\n')
+	st.write('\n')
+
+	st.markdown(html_temp3.format("blue","Runs"),unsafe_allow_html=True)
+	st.write(runs)
+	st.write('\n')
+	st.write('\n')
+
+	st.markdown(html_temp3.format("blue","Mean"),unsafe_allow_html=True)
+	st.write(mean)
+	st.write('\n')
+	st.write('\n')
+
+	st.markdown(html_temp3.format("blue","Standard Deviation"),unsafe_allow_html=True)
+	st.write(std)
 	st.write('\n')
 	st.write('\n')
 
@@ -330,6 +377,22 @@ if(selection=="Runs Test Exception"):
 	pvalue=2*min(1 - norm.cdf((runs-mean)/std),norm.cdf((runs-mean)/std))
 
 	st.markdown(html_temp1.format("white","Results"),unsafe_allow_html=True)
+	st.write('\n')
+	st.write('\n')
+
+
+	st.markdown(html_temp3.format("blue","Runs"),unsafe_allow_html=True)
+	st.write(runs)
+	st.write('\n')
+	st.write('\n')
+
+	st.markdown(html_temp3.format("blue","Mean"),unsafe_allow_html=True)
+	st.write(mean)
+	st.write('\n')
+	st.write('\n')
+
+	st.markdown(html_temp3.format("blue","Standard Deviation"),unsafe_allow_html=True)
+	st.write(std)
 	st.write('\n')
 	st.write('\n')
 
